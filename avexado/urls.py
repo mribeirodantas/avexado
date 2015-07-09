@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', RedirectView.as_view(url='/wiki/Start')),
+    url(r'^wiki/$', RedirectView.as_view(url='/wiki/Start')),
     url(r'^wiki/(?P<page_name>[^/]+)/$', 'avexado.apps.wiki.views.view_page'),
     url(r'^wiki/(?P<page_name>[^/]+)/edit/$', 'avexado.apps.wiki.views.edit_page'),
 ]
