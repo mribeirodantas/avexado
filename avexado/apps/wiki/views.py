@@ -3,11 +3,16 @@ from django.http import HttpResponseRedirect
 
 from avexado.apps.wiki.models import Page
 
+import re
+
 
 def view_page(request, page_name):
     try:
         page = Page.objects.get(pk=page_name)
         content = page.content
+        pattern = r'\_(.*?)\_'
+        rep = u'<a href="/wiki/\\1">\\1</a>'
+        content = re.sub(pattern, rep, content)
         last_edited_at = page.last_edited_at
     except Page.DoesNotExist:
         return render_to_response('create.html', {'page_name': page_name})
