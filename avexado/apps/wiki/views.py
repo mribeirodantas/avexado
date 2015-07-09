@@ -8,11 +8,13 @@ def view_page(request, page_name):
     try:
         page = Page.objects.get(pk=page_name)
         content = page.content
+        last_edited_at = page.last_edited_at
     except Page.DoesNotExist:
         return render_to_response('create.html', {'page_name': page_name})
 
     return render_to_response('view.html', {'page_name': page_name,
-                                            'content': content})
+                                            'content': content,
+                                            'last_edit_time': last_edited_at})
 
 
 def edit_page(request, page_name):
