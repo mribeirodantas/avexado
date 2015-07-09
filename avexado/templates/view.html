@@ -5,8 +5,10 @@
 <body>
     <h1> {{ page_name }} </h1>
     <br/>
-    {{ content|safe }}
-<br><br>
+    <div style="background-color:rgb(212, 201, 201);margin-left: 20px;margin-right: 20px;padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px;">
+        <pre>{{ content|safe }}</pre>
+    </div>
+<br>
 <hr>
 <a href="/wiki/{{ page_name }}/edit">Edit</a> <br/>
 <i>Last edited at: {{ last_edit_time }}.</i>
