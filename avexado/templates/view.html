@@ -1,33 +1,36 @@
-<html>
-<head>
-    <title> [avexado] {{ page_name }} </title>
-</head>
-<body onLoad="document.form1.codebox1.focus()">
-    <table width="100%">
-        <tr>
-            <td><h1> {{ page_name }} </h1></td>
-            <td><form name="form1" method="GET">
-                <p align="right"><input name="codebox1" id="search_form" type="text" placeholder="Search other pages here"/></p>
-                <input name="button1"  style="display: none;" type="submit" value="Submit" onClick="return redirect(this.form)"/></td>
-            </form>
-        </tr>
-    </table>
-    <br/>
-    <div style="background-color:rgb(212, 201, 201);margin-left: 20px;margin-right: 20px;padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px;">
-        <pre>{{ content|safe }}</pre>
-    </div>
+{% extends 'base.html' %}
+{% block title %} [avexado] {{ page_name }} {% endblock %}
+
+{% block content %}
+<table width="100%">
+    <tr>
+        <td><h1> {{ page_name }} </h1></td>
+        <td><form name="form1" method="GET">
+            <p align="right"><input name="codebox1" id="search_form" type="text" placeholder="Search other pages here"/></p>
+            <input name="button1"  style="display: none;" type="submit" value="Submit" onClick="return redirect(this.form)"/></td>
+        </form>
+    </tr>
+</table>
+<br/>
+<div style="background-color:rgb(212, 201, 201);margin-left: 20px;margin-right: 20px;padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px;">
+    <pre>{{ content|safe }}</pre>
+</div>
+{% endblock %}
+
+{% block foot %}
 <br>
 <hr>
 <table width="100%">
     <td><a href="/wiki/{{ page_name }}/edit">Edit</a> <br/><i>Last edited at: {{ last_edit_time }}.</i></td>
     <td><p align="right"><i>avexado</i></p></td>
 </table>
-</body>
+{% endblock %}
 
+{% block script %}
 <script language="javascript">
 function redirect (form) {
     window.location = '../'.concat(document.getElementById('search_form').value);
     return false;
 };
 </script>
-</html>
+{% endblock %}

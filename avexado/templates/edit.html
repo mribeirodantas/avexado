@@ -1,14 +1,33 @@
-<html>
-<head>
-    <title> [avexado] {{ page_name }} </title>
-</head>
-<body>
-    <h1> Editing {{ page_name }}</h1>
-    <form method='post' action='/wiki/{{ page_name }}/edit/'>{% csrf_token %}
-        <textarea name='content' rows='20' cols='60'>{{ content }}</textarea><br/>
-        <input  type='submit' value='Save page'/>
-    </form>
-    <hr>
-    <p align="right"><i>avexado</i></p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %} [avexado] {{ page_name }} {% endblock %}
+
+{% block content %}
+<table width="100%">
+    <tr>
+        <td><h1> Editing {{ page_name }} </h1></td>
+        <td><form name="form1" method="GET">
+            <p align="right"><input name="codebox1" id="search_form" type="text" placeholder="Search other pages here"/></p>
+            <input name="button1"  style="display: none;" type="submit" value="Submit" onClick="return redirect(this.form)"/></td>
+        </form>
+    </tr>
+</table>
+<br/>
+<form method='post' action='/wiki/{{ page_name }}/edit/'>{% csrf_token %}
+    <textarea name='content' rows='20' cols='60'>{{ content }}</textarea><br/>
+    <input  type='submit' value='Save page'/>
+</form>
+{% endblock %}
+
+{% block foot %}
+<hr>
+<p align="right"><i>avexado</i></p>
+{% endblock %}
+
+{% block script %}
+<script language="javascript">
+function redirect (form) {
+    window.location = '../../'.concat(document.getElementById('search_form').value);
+    return false;
+};
+</script>
+{% endblock %}
